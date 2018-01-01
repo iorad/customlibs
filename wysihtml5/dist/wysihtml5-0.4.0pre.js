@@ -8926,11 +8926,7 @@ wysihtml5.views.Textarea = wysihtml5.views.View.extend(
       var that = this,
           callbackWrapper = function(event) {
             var attributes = that._serialize();
-            if (attributes == that.elementToChange) {
-              that.fire("edit", attributes);
-            } else {
-              that.fire("save", attributes);
-            }
+            that.fire("save", attributes);
             that.hide();
             event.preventDefault();
             event.stopPropagation();
