@@ -6930,7 +6930,7 @@ wysihtml5.commands.bold = {
       if (anchors) {
         // Selection contains links
         composer.selection.executeAndRestore(function() {
-          _removeFormat(composer, anchors);
+          //_removeFormat(composer, anchors); // IORAD: DISABLED
         });
       } else {
         // Create links
