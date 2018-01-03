@@ -6931,6 +6931,12 @@ wysihtml5.commands.bold = {
         // Selection contains links
         composer.selection.executeAndRestore(function() {
           //_removeFormat(composer, anchors); // IORAD: DISABLED
+          // IORAD: reset title attribute
+          for (var i = 0; i < anchors.length; i++) {
+            var a = anchors[i];
+            var title = "Link: " + a.getAttribute("href");
+            a.setAttribute("title", title);
+          }
         });
       } else {
         // Create links
