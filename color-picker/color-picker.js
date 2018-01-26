@@ -182,6 +182,9 @@
 				return false;
 			},
 			upSelector = function (ev) {
+				// IORAD CUSTOM: change on click (https://github.com/iorad/iorad/issues/5366)
+				moveSelector(ev);
+
 				fillRGBFields(ev.data.cal.data('colorpicker').color, ev.data.cal.get(0));
 				fillHexFields(ev.data.cal.data('colorpicker').color, ev.data.cal.get(0));
 				$(document).unbind('mouseup', upSelector);
