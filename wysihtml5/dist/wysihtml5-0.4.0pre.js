@@ -4919,13 +4919,15 @@ wysihtml5.dom.parse = (function() {
       }
     }
     
-    if (nodeName in tagRules) {
-      rule = tagRules[nodeName];
+    if ((nodeName in tagRules) || tagRules['*']) {
+      rule = tagRules[nodeName] || tagRules['*'];
       if (!rule || rule.remove) {
         return null;
       }
       
-      rule = typeof(rule) === "string" ? { rename_tag: rule } : rule;
+      rule = typeof(rule) === "string" ? { rename_tag: rule }
+        : typeof(rule) === "function" ? rule(oldNode)
+        : rule;
     } else if (oldNode.firstChild) {
       rule = { rename_tag: DEFAULT_NODE_NAME };
     } else {
@@ -4946,6 +4948,7 @@ wysihtml5.dom.parse = (function() {
         addClass            = rule.add_class,             // add classes based on existing attributes
         setAttributes       = rule.set_attributes,        // attributes to set on the current node
         checkAttributes     = rule.check_attributes,      // check/convert values of attributes
+        removeAttributes    = rule.remove_attributes,
         allowedClasses      = currentRules.classes,
         i                   = 0,
         classes             = [],
@@ -5041,6 +5044,12 @@ wysihtml5.dom.parse = (function() {
       }
       if (typeof(attributes.height) !== "undefined") {
         newNode.setAttribute("height", attributes.height);
+      }
+    }
+
+    if (removeAttributes) {
+      while (newNode.attributes.length > 0) {
+        newNode.removeAttribute(newNode.attributes[0].name);
       }
     }
   }
