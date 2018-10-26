@@ -423,7 +423,15 @@
 
       var pixelatedImgData = this._pixelatedContext.getImageData(sa.x + 1, sa.y + 1, sa.w - 1, sa.h - 1);
 
-      this._selectorContext.putImageData(pixelatedImgData, sa.x, sa.y);
+      if (this._previewFunction) {
+        this._selectorContext.putImageData(
+          this._previewFunction(this.currentCanvas, sa),
+          sa.x,
+          sa.y
+        );
+      } else {
+        this._selectorContext.putImageData(pixelatedImgData, sa.x, sa.y);
+      }
     },
     clearPixelatedSelectedArea: function() {
       var x = this._selectedArea.x,
@@ -477,7 +485,11 @@
      */
     isMasked: function() {
       return this._masked;
-    }
+    },
+    // the function to preview the mask on area selection
+    setPreviewFunction(previewFunction) {
+      this._previewFunction = previewFunction;
+    },
   });
 
 
