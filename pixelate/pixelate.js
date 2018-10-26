@@ -487,7 +487,7 @@
       return this._masked;
     },
     // the function to preview the mask on area selection
-    setPreviewFunction(previewFunction) {
+    setPreviewFunction: function(previewFunction) {
       this._previewFunction = previewFunction;
     },
   });
