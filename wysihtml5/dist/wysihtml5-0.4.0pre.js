@@ -6919,6 +6919,31 @@ wysihtml5.commands.bold = {
     }
     composer.selection.setAfter(elementToSetCaretAfter);
   }
+
+  wysihtml5.commands.unlink = {
+    /**
+     * TODO: Use HTMLApplier or formatInline here
+     *
+     * If selection is already a link, it removes the link and wraps it with a <code> element
+     * The <code> element is needed to avoid auto linking
+     * 
+     * @example
+     *    wysihtml5.commands.createLink.exec(composer, "unlink");
+     */
+    exec: function(composer, command, value) {
+      var anchors = this.state(composer, command);
+      if (anchors) {
+        // Selection contains links
+        composer.selection.executeAndRestore(function() {
+          _removeFormat(composer, anchors);
+        });
+      }
+    },
+
+    state: function(composer, command) {
+      return wysihtml5.commands.formatInline.state(composer, command, "A");
+    }
+  };
   
   wysihtml5.commands.createLink = {
     /**
