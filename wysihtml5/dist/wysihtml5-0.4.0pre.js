@@ -5831,6 +5831,25 @@ wysihtml5.quirks.ensureProperClearing = (function() {
     wysihtml5.dom.observe(composer.element, ["cut", "keydown"], clearIfNecessary);
   };
 })();
+
+wysihtml5.quirks.ioradEnsureFontClearing = (function() {
+  var clearIfNecessary = function() {
+    var element = this;
+    setTimeout(function() {
+      element.querySelectorAll('font').forEach(function(el) {
+        // unwrap
+        var parent = el.parentNode;
+        while (el.firstChild) parent.insertBefore(el.firstChild, el);
+        parent.removeChild(el);
+      })
+    }, 0);
+  };
+
+  return function(composer) {
+    wysihtml5.dom.observe(composer.element, ["cut", "keydown"], clearIfNecessary);
+  };
+})();
+
 // See https://bugzilla.mozilla.org/show_bug.cgi?id=664398
 //
 // In Firefox this:
@@ -8148,6 +8167,8 @@ wysihtml5.views.View = Base.extend(
       if (!browser.clearsContentEditableCorrectly()) {
         wysihtml5.quirks.ensureProperClearing(this);
       }
+      // https://github.com/iorad/iorad/issues/7500
+      wysihtml5.quirks.ioradEnsureFontClearing(this);
       
       // Set up a sync that makes sure that textarea and editor have the same content
       if (this.initSync && this.config.sync) {
