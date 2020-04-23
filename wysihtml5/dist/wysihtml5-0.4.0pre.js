@@ -4969,7 +4969,9 @@ wysihtml5.dom.parse = (function() {
     
     if (checkAttributes) {
       for (attributeName in checkAttributes) {
-        method = attributeCheckMethods[checkAttributes[attributeName]];
+        method = typeof checkAttributes[attributeName] === 'function'
+            ? checkAttributes[attributeName] // IORAD: support custom functions in check_attributes
+            : attributeCheckMethods[checkAttributes[attributeName]];
         if (!method) {
           continue;
         }
