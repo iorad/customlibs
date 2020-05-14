@@ -86,16 +86,16 @@
         });
 
         dialog.on("save", function(attributes) {
+          if (caretBookmark) {
+            that.composer.selection.setBookmark(caretBookmark);
+          }
+
           that.editor.fire("beforeSave:dialog", {
             command: command,
             dialogContainer: dialogElement,
             commandLink: link,
             attributes: attributes
           });
-
-          if (caretBookmark) {
-            that.composer.selection.setBookmark(caretBookmark);
-          }
 
           that._execCommand(command, attributes);
 

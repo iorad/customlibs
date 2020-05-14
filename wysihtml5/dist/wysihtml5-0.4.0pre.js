@@ -9315,6 +9315,10 @@ wysihtml5.views.Textarea = wysihtml5.views.View.extend(
         });
 
         dialog.on("save", function(attributes) {
+          if (caretBookmark) {
+            that.composer.selection.setBookmark(caretBookmark);
+          }
+
           that.editor.fire("beforeSave:dialog", {
             command: command,
             dialogContainer: dialogElement,
@@ -9322,9 +9326,6 @@ wysihtml5.views.Textarea = wysihtml5.views.View.extend(
             attributes: attributes
           });
 
-          if (caretBookmark) {
-            that.composer.selection.setBookmark(caretBookmark);
-          }
           that._execCommand(command, attributes);
           
           that.editor.fire("save:dialog", { command: command, dialogContainer: dialogElement, commandLink: link });
