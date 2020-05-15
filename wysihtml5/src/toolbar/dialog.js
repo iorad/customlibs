@@ -54,17 +54,7 @@
             if (attributes == that.elementToChange) {
               that.fire("edit", attributes);
             } else {
-              try {
-                that.fire("save", attributes);
-              } catch(error) {
-                console.log(error);
-
-                event.preventDefault();
-
-                event.stopPropagation();
-
-                return false;
-              }
+              that.fire("save", attributes);
             }
             that.hide();
             event.preventDefault();

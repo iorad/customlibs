@@ -89,16 +89,8 @@
           if (caretBookmark) {
             that.composer.selection.setBookmark(caretBookmark);
           }
-
-          that.editor.fire("beforeSave:dialog", {
-            command: command,
-            dialogContainer: dialogElement,
-            commandLink: link,
-            attributes: attributes
-          });
-
           that._execCommand(command, attributes);
-
+          
           that.editor.fire("save:dialog", { command: command, dialogContainer: dialogElement, commandLink: link });
         });
 

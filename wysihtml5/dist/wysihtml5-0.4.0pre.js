@@ -8995,7 +8995,7 @@ wysihtml5.views.Textarea = wysihtml5.views.View.extend(
 
               that.hide();
             } catch(error) {
-              console.log(error);
+              console.error(error);
             }
 
             event.preventDefault();
