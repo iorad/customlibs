@@ -7861,6 +7861,13 @@ wysihtml5.commands.redo = {
       this.set(this.historyDom[++this.position - 1]);
       this.editor.fire("redo:composer");
     },
+
+    // @IORAD CUSTOM: clear undo/redo history
+    clear: function() {
+      this.position = 0;
+      this.historyStr = [];
+      this.historyDom = [];
+    },
     
     undoPossible: function() {
       return this.position > 1;
