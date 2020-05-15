@@ -8996,8 +8996,15 @@ wysihtml5.views.Textarea = wysihtml5.views.View.extend(
       var that = this,
           callbackWrapper = function(event) {
             var attributes = that._serialize();
-            that.fire("save", attributes);
-            that.hide();
+
+            try {
+              that.fire("save", attributes);
+
+              that.hide();
+            } catch(error) {
+              console.error(error);
+            }
+
             event.preventDefault();
             event.stopPropagation();
           };
@@ -9318,6 +9325,14 @@ wysihtml5.views.Textarea = wysihtml5.views.View.extend(
           if (caretBookmark) {
             that.composer.selection.setBookmark(caretBookmark);
           }
+
+          that.editor.fire("beforeSave:dialog", {
+            command: command,
+            dialogContainer: dialogElement,
+            commandLink: link,
+            attributes: attributes
+          });
+
           that._execCommand(command, attributes);
           
           that.editor.fire("save:dialog", { command: command, dialogContainer: dialogElement, commandLink: link });
