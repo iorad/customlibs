@@ -9113,7 +9113,13 @@ wysihtml5.views.Textarea = wysihtml5.views.View.extend(
      */
     show: function(elementToChange) {
       if (dom.hasClass(this.link, CLASS_NAME_OPENED)) {
-        return;
+        // IORAD https://github.com/iorad/iorad/issues/10470#issuecomment-787433276:
+        // the hyperlink field doesn't update on a step with multiple hyperlinks
+        if (elementToChange !== this.elementToChange) {
+          this.hide();
+        } else {
+          return;
+        }
       }
 
       var that        = this,
