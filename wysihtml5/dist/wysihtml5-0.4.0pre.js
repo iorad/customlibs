@@ -7519,7 +7519,10 @@ wysihtml5.commands.bold = {
         list = wysihtml5.dom.convertToList(tempElement, "ol");
       });
       if (isEmpty) {
-        composer.selection.selectNode(list.querySelector("li"), true);
+        composer.selection.selectNode(
+          list.querySelector("li"),
+          false // IORAD: add invisible space when empty, to fix cursor position (see https://github.com/iorad/iorad/issues/12297)
+        );
       }
     }
   },
@@ -7568,7 +7571,10 @@ wysihtml5.commands.bold = {
         list = wysihtml5.dom.convertToList(tempElement, "ul");
       });
       if (isEmpty) {
-        composer.selection.selectNode(list.querySelector("li"), true);
+        composer.selection.selectNode(
+          list.querySelector("li"),
+          false // IORAD: add invisible space when empty, to fix cursor position (see https://github.com/iorad/iorad/issues/12297)
+        );
       }
     }
   },
