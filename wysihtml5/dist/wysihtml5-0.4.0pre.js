@@ -7519,10 +7519,12 @@ wysihtml5.commands.bold = {
         list = wysihtml5.dom.convertToList(tempElement, "ol");
       });
       if (isEmpty) {
-        composer.selection.selectNode(
-          list.querySelector("li"),
-          false // IORAD: add invisible space when empty, to fix cursor position (see https://github.com/iorad/iorad/issues/12297)
-        );
+        var firstLi = list.querySelector("li");
+        if (firstLi.innerHTML === "") {
+          // IORAD: add invisible space when empty, to fix cursor position (see https://github.com/iorad/iorad/issues/12297)
+          firstLi.appendChild(document.createElement("br"));
+        }
+        composer.selection.selectNode(firstLi, true);
       }
     }
   },
@@ -7571,10 +7573,12 @@ wysihtml5.commands.bold = {
         list = wysihtml5.dom.convertToList(tempElement, "ul");
       });
       if (isEmpty) {
-        composer.selection.selectNode(
-          list.querySelector("li"),
-          false // IORAD: add invisible space when empty, to fix cursor position (see https://github.com/iorad/iorad/issues/12297)
-        );
+        var firstLi = list.querySelector("li");
+        if (firstLi.innerHTML === "") {
+          // IORAD: add invisible space when empty, to fix cursor position (see https://github.com/iorad/iorad/issues/12297)
+          firstLi.appendChild(document.createElement("br"));
+        }
+        composer.selection.selectNode(firstLi, true);
       }
     }
   },
