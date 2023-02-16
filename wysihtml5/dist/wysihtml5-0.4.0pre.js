@@ -5721,7 +5721,11 @@ wysihtml5.dom.replaceWithChildNodes = function(node) {
         set = function() {
           if (view.isEmpty()) {
             view.placeholderSet = true;
-            view.setValue(placeholderText);
+            view.setValue(
+              // IORAD: accept function for dynamic placeholder
+              typeof placeholderText === 'function' ? placeholderText()
+              : placeholderText
+            );
             dom.addClass(view.element, CLASS_NAME);
           }
         };
@@ -8161,9 +8165,15 @@ wysihtml5.views.View = Base.extend(
       }
 
       // Simulate html5 placeholder attribute on contentEditable element
-      var placeholderText = typeof(this.config.placeholder) === "string"
-        ? this.config.placeholder
-        : this.textarea.element.getAttribute("placeholder");
+      // IORAD: accept function for dynamic placeholder
+      var placeholderTextFn = (function () {
+        return typeof this.config.placeholder === "string"
+          ? this.config.placeholder
+          : this.textarea.element.getAttribute("placeholder");
+      }).bind(this);
+      var placeholderText = this.config.dynamicPlaceholder ?
+        placeholderTextFn
+        : placeholderTextFn();
       if (placeholderText) {
         dom.simulatePlaceholder(this.parent, this, placeholderText);
       }
