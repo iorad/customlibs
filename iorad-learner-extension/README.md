@@ -29,12 +29,11 @@ You can integrate the relevant parts into your own extension as needed.
 
 - Run a [content script](content.js) on the URLs where you want to inject the iorad learner widget.
 
-	The content script loads a small JavaScript file (`page.js`) into the page context to avoid the CSP restrictions of MV3 extensions, it also lets us programmatically override the widget options if needed, via the `window.ioradWidgetCustomOptions` object.
+	The content script loads a small JavaScript file (`page.js`) into the page context to avoid the CSP restrictions of MV3 extensions, the `page.js` also lets us programmatically override the widget options if needed, via the `window.ioradWidgetCustomOptions` object.
 
 - The [`page.js`](page.js) file injects the iorad learner widget by adding a `<script>` tag to the page.
 
-	The script `src` should be set to `https://www.iorad.com/widgets/live/${USER_ID}`.
-where `USER_ID` is your iorad user ID.
+	The script `src` should be set to `https://www.iorad.com/widgets/live/${USER_ID}`, where `USER_ID` is your iorad user ID.
 
 Check the [`manifest.json`](manifest.json) to see how to assign proper permissions for the required URLs:
 - content_scripts matches
