@@ -7,7 +7,7 @@ Make a note of the library name, as you will need it later to configure the widg
 
 ### Widget Configuration
 
-You need an iorad account with a subscription that includes the "Widgets" feature. You will also need a website where you can manually add the iorad widget for the initial connection.
+You need a subscription that includes the "Widgets" feature. You also need a website for the initial widget connection.
 
 To connect your widget, go to [https://www.iorad.com/connectIntegrations/widgets](https://www.iorad.com/connectIntegrations/widgets) and follow the instructions.
 
