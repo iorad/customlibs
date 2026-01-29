@@ -2,16 +2,16 @@
 ## iorad Library
 
 The iorad learner widget displays a library of your choice.
-Visit [https://ldev.iorad.dev/libraries?tab=my](https://ldev.iorad.dev/libraries?tab=my) to view your available libraries or create a new one if needed.
+Visit [https://www.iorad.com/libraries?tab=my](https://www.iorad.com/libraries?tab=my) to view your available libraries or create a new one if needed.
 Make a note of the library name, as you will need it later to configure the widget.
 
 ### Widget Configuration
 
 You need an iorad account with a subscription that includes the "Widgets" feature. You will also need a website where you can manually add the iorad widget for the initial connection.
 
-To connect your widget, go to [https://ldev.iorad.dev/connectIntegrations/widgets](https://ldev.iorad.dev/connectIntegrations/widgets) and follow the instructions provided.
+To connect your widget, go to [https://www.iorad.com/connectIntegrations/widgets](https://www.iorad.com/connectIntegrations/widgets) and follow the instructions.
 
-You will be asked to add a script tag like the following to your website:
+You will be asked to add a script tag like this to your website:
 
 ```html
 <script src="https://www.iorad.com/widgets/live/[USER_ID]" async></script>
@@ -19,7 +19,7 @@ You will be asked to add a script tag like the following to your website:
 
 Take note of your actual USER_ID, you'll need it in the extension code later.
 
-Once connected, use the Connection → "Connected Library" dropdown to select your desired library. You can also customize other widget options as needed, such as colors and fonts.
+Once connected, use the "Connected Library" dropdown to select your library. You can also customize other widget options as needed, such as colors and fonts.
 
 ### Extension Integration
 
@@ -27,16 +27,16 @@ This folder provides a minimal example of a Manifest V3 browser extension that i
 
 You can integrate the relevant parts into your own extension as needed.
 
-- Run a content script on the URLs where you want to inject the iorad learner widget.
+- Run a [content script](content.js) on the URLs where you want to inject the iorad learner widget.
 
-	The content script loads a small JavaScript file (`page.js`) into the page context to avoid the CSP restrictions of MV3 extensions.
+	The content script loads a small JavaScript file (`page.js`) into the page context to avoid the CSP restrictions of MV3 extensions, it also lets us programmatically override the widget options if needed, via the `window.ioradWidgetCustomOptions` object.
 
-- The `page.js` file injects the iorad learner widget by adding a `<script>` tag to the page.
+- The [`page.js`](page.js) file injects the iorad learner widget by adding a `<script>` tag to the page.
 
 	The script `src` should be set to `https://www.iorad.com/widgets/live/${USER_ID}`.
 where `USER_ID` is your iorad user ID.
 
-Check the `manifest.json` to see how to assign proper permissions for the required URLs:
+Check the [`manifest.json`](manifest.json) to see how to assign proper permissions for the required URLs:
 - content_scripts matches
 - host_permissions
 - web_accessible_resources matches
