@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>iorad Sidepanel</title>
+  <style>
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		.iframe-container {
+			width: 100vw;
+			height: 100vh;
+			box-sizing: border-box;
+			padding: 32px 0; /* 32px top and bottom padding */
+			display: flex;
+			justify-content: center;
+			align-items: stretch;
+		}
+		.iframe-container iframe {
+			width: 100vw;
+			height: 100%;
+			border: none;
+		}
+  </style>
+</head>
+<body>
+  <div class="iframe-container">
+    <iframe
+      src="https://www.iorad.com/player/2656641/How-to-Create-a-new-Opportunity-in-Salesforce?partnerExtensionEmbed=true"
+      title="Iorad Player"
+      frameborder="0"
+      webkitallowfullscreen="webkitallowfullscreen"
+      mozallowfullscreen="mozallowfullscreen"
+      allowfullscreen="allowfullscreen"
+      allow="camera; microphone; clipboard-write; accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+    ></iframe>
+  </div>
+  <script src="sidepanel.js"></script>
+</body>
+</html>

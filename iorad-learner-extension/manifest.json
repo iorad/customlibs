@@ -10,6 +10,15 @@
   },
   "author": "iorad",
   "short_name": "iorad learner",
+  "action": {
+    "default_title": "Open sidepanel"
+  },
+  "background": {
+    "service_worker": "service_worker.js"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
+  },
   "content_scripts": [
     {
       "matches": [
@@ -34,7 +43,8 @@
   }],
   "permissions": [
     "declarativeNetRequest",
-    "declarativeNetRequestWithHostAccess"
+    "declarativeNetRequestWithHostAccess",
+    "sidePanel"
   ],
   "declarative_net_request": {
     "rule_resources": [

@@ -27,9 +27,15 @@ This folder provides a minimal example of a Manifest V3 browser extension that i
 
 You can integrate the relevant parts into your own extension as needed.
 
-- Run a [content script](content.js) on the URLs where you want to inject the iorad learner widget.
+- A [service worker](service_worker.js) that just opens a side panel when the extension button is clicked.
+
+- A [side panel](side_panel.html) that embeds a tutorial. The [side panel script](side_panel.js) listens for messages for the iorad widget (e.g. to start LIVE) and forwards them to the content script.
+
+- A [content script](content.js) on the URLs where you want to inject the iorad learner widget.
 
 	The content script loads a small JavaScript file (`page.js`) into the page context to avoid the CSP restrictions of MV3 extensions, the `page.js` also lets us programmatically override the widget options if needed, via the `window.ioradWidgetCustomOptions` object.
+
+	The content script also listens for messages for the iorad widget and forwards them to it.
 
 - The [`page.js`](page.js) file injects the iorad learner widget by adding a `<script>` tag to the page.
 
@@ -49,3 +55,5 @@ Check the [`manifest.json`](manifest.json) to see how to assign proper permissio
 1) Inject the iorad widget on every page where LIVE may run (including any new tabs LIVE opens).
 
 2) Embed tutorials with this URL param: partnerExtensionEmbed=true.
+
+Now, when Do Live is clicked from within the tutorial, an HTML5 message is sent to the iorad widget in the top frame, which triggers LIVE to start.
