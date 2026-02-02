@@ -23,7 +23,7 @@ Once connected, use the "Connected Library" dropdown to select your library. You
 
 ### Extension Integration
 
-This folder provides a minimal example of a Manifest V3 browser extension that injects the iorad learner widget into specific URLs (for example, "workday.com" and "salesforce.com").
+This folder provides a minimal example of a Manifest V3 browser extension that injects the iorad learner widget into specific URLs.
 
 You can integrate the relevant parts into your own extension as needed.
 
@@ -35,7 +35,17 @@ You can integrate the relevant parts into your own extension as needed.
 
 	The script `src` should be set to `https://www.iorad.com/widgets/live/${USER_ID}`, where `USER_ID` is your iorad user ID.
 
+- Some websites have CSP rules that prevent the injection of external scripts. To bypass these restrictions, we use the `declarativeNetRequest` API to remove the CSP headers from the responses of the target URLs.
+
+	See the [`rule_remove_csp.json`](rule_remove_csp.json) file for the rule definition. Remove or restrict the rules as needed for your actual target websites.
+
 Check the [`manifest.json`](manifest.json) to see how to assign proper permissions for the required URLs:
 - content_scripts matches
 - host_permissions
 - web_accessible_resources matches
+
+### Go Live from tutorials embedded into your extension
+
+1) Inject the iorad widget on every page where LIVE may run (including any new tabs LIVE opens).
+
+2) Embed tutorials with this URL param: partnerExtensionEmbed=true.

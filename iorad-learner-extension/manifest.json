@@ -13,10 +13,7 @@
   "content_scripts": [
     {
       "matches": [
-        "https://salesforce.com/**",
-        "https://*.salesforce.com/**",
-        "https://workday.com/**",
-        "https://*.workday.com/**"
+        "<all_urls>"
       ],
       "match_about_blank": false,
       "js": [
@@ -27,18 +24,25 @@
     }
   ],
   "host_permissions": [
-    "https://salesforce.com/*",
-    "https://*.salesforce.com/*",
-    "https://workday.com/*",
-    "https://*.workday.com/*"
+    "<all_urls>"
   ],
   "web_accessible_resources": [{
     "resources": ["page.js"],
     "matches": [
-      "https://salesforce.com/*",
-      "https://*.salesforce.com/*",
-      "https://workday.com/*",
-      "https://*.workday.com/*"
+      "<all_urls>"
     ]
-  }]
+  }],
+  "permissions": [
+    "declarativeNetRequest",
+    "declarativeNetRequestWithHostAccess"
+  ],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "remove-csp",
+        "enabled": true,
+        "path": "rule_remove_csp.json"
+      }
+    ]
+  }
 }
