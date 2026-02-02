@@ -29,7 +29,7 @@ You can integrate the relevant parts into your own extension as needed.
 
 - A [service worker](service_worker.js) that just opens a side panel when the extension button is clicked.
 
-- A [side panel](side_panel.html) that embeds a tutorial. The [side panel script](side_panel.js) listens for messages for the iorad widget (e.g. to start LIVE) and forwards them to the content script.
+- A [sidepanel](sidepanel.html) that embeds a tutorial. The [sidepanel script](sidepanel.js) listens for messages for the iorad widget (e.g. to start LIVE) and forwards them to the content script.
 
 - A [content script](content.js) on the URLs where you want to inject the iorad learner widget.
 
@@ -56,4 +56,4 @@ Check the [`manifest.json`](manifest.json) to see how to assign proper permissio
 
 2) Embed tutorials with this URL param: partnerExtensionEmbed=true.
 
-Now, when Do Live is clicked from within the tutorial, an HTML5 message is sent to the iorad widget in the top frame, which triggers LIVE to start.
+Now, when "Go Live" is clicked from within the tutorial, an HTML5 message is sent to the iorad widget in the top frame, which triggers LIVE to start.
